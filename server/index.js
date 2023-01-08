@@ -13,14 +13,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 //test route
 app.get("/test", (req, res) => {
-  res.send("Aye mate")
-})
+  res.send("Aye mate");
+});
 // github routes
 app.post("/auth", (req, res) => {
   const code = req.query.code;
   Oauth(code)
     .then((token) => {
-      console.log({ token });
+      // console.log({ token });
       const getUserInfo = async () => {
         const repos = await axios.get("https://api.github.com/user/repos", {
           headers: {
@@ -37,7 +37,7 @@ app.post("/auth", (req, res) => {
           },
         });
         const payload = { repos: repos.data, user: user.data, token };
-        console.log(payload);
+        // console.log(payload);
         res.json(payload);
       };
 
@@ -65,7 +65,7 @@ app.post("/loggedin", (req, res) => {
       },
     });
     const payload = { repos: repos.data, user: user.data };
-    console.log(payload);
+    // console.log(payload);
     res.json(payload);
   };
 
@@ -102,29 +102,33 @@ app.post("/webhook", (req, res) => {
 
 // twitter routes
 app.post("/tweet", (req, res) => {
-  console.log(req.body)
-  console.log(Object.keys(req.body))
-  console.log(req.body.commits[0].message)
-  // const Twitter = new Twit({
-  //   consumer_key: "9u3FA6YzQaCkBj0I2zL3KnZdZ",
-  //   consumer_secret: "OJz4FqXtbw9PMxyRSIMeKYvMqf67KeO49YXtdzsJczWKA33kv8",
-  //   access_token: "1468834737829474305-mlxfdT7a0LZ6lWiT3DuxtngBag3TJD",
-  //   access_token_secret: "xbmT46GIcde04BeQgUZT2el8aoYOr9Xh3JUAE2fUkHd2j",
-  //   timeout_ms: 60 * 1000, // optional HTTP request timeout to apply to all requests.
-  // });
+  const tweet = req.body.commits[0].message;
+  const link = req.body.commits[0].url;
+  if (tweet.includes("tweet:")) {
+    const updatedTweet = tweet.replace("tweet:", "");
+    const Twitter = new Twit({
+      consumer_key: "9u3FA6YzQaCkBj0I2zL3KnZdZ",
+      consumer_secret: "OJz4FqXtbw9PMxyRSIMeKYvMqf67KeO49YXtdzsJczWKA33kv8",
+      access_token: "1468834737829474305-mlxfdT7a0LZ6lWiT3DuxtngBag3TJD",
+      access_token_secret: "xbmT46GIcde04BeQgUZT2el8aoYOr9Xh3JUAE2fUkHd2j",
+      timeout_ms: 60 * 1000, // optional HTTP request timeout to apply to all requests.
+    });
 
-  // var params = {
-  //   status: "testing twitter api",
-  // };
+    var params = {
+      status: `#automatedbystreakbot \n ${updatedTweet} \n ${link}`,
+    };
 
-  // function tweetResult(err, data, response) {
-  //   console.log(data);
-  // }
+    function tweetResult(err, data, response) {
+      if (err) {
+        console.log({ err });
+      } else {
+        console.log("tweet successful");
+      }
+    }
 
-  // Twitter.post("statuses/update", params, tweetResult);
-
+    Twitter.post("statuses/update", params, tweetResult);
+  }
 });
-
 
 //Listen
 app.listen(PORT, () => {
