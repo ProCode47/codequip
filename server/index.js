@@ -11,10 +11,12 @@ const util = require("util");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
 //test route
-app.get("/test", (req, res) => {
-  res.send("Aye mate");
-});
+// app.get("/test", (req, res) => {
+//   res.send("Aye mate");
+// });
+
 // github routes
 app.post("/auth", (req, res) => {
   const code = req.query.code;
