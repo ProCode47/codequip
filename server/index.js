@@ -103,6 +103,8 @@ app.post("/webhook", (req, res) => {
 // twitter routes
 app.post("/tweet", (req, res) => {
   console.log(req.body)
+  console.log(Object.keys(req.body))
+  console.log(req.body.commits[0].message)
   // const Twitter = new Twit({
   //   consumer_key: "9u3FA6YzQaCkBj0I2zL3KnZdZ",
   //   consumer_secret: "OJz4FqXtbw9PMxyRSIMeKYvMqf67KeO49YXtdzsJczWKA33kv8",
