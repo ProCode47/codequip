@@ -1,40 +1,105 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
-$purple: #A31ACB;
-$purple-grey: #A686AD;
-$off-white:#FFF5FF;
+$purple: #a31acb;
+$purple-grey: #a686ad;
+$off-white: #fff5ff;
 $black: #221824;
 
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: $black;
+  color: $off-white;
+  margin: 0;
+  padding: 0;
+}
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+
+  button {
+    font-family: inherit;
+    background-color: $purple;
+    padding: 20px;
+    border-radius: 5px;
     color: inherit;
+    border: none;
+    cursor: pointer;
+  }
+  img {
+    margin-top: auto;
+  }
 }
-
-body{
-    font-family: "Montserrat", sans-serif;
-    background-color: $black;
-    color: $off-white;
-    margin: 0;
-    padding: 0;
-
-}
-.hero{
+.list {
+  .header {
     display: flex;
+    padding: 0.2rem;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $purple;
+
+    h2 {
+      padding-left: 1rem;
+    }
+    .profile {
+        display: flex;
+        padding-right: 1rem;
+        align-items: center;
+    
+        img{
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+    
+        // align-items: center;
+      }
+  }
+  .repos{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    height: 100vh;
 
-    button{
-        font-family: inherit;
-        background-color:$purple;
-        padding: 20px;
-        border-radius: 5px;
-        color: inherit;
-        border: none;
-        cursor: pointer;
+    h2{
+        padding-left: 1rem;
     }
-    img {
-        margin-top: auto;
+    ul{
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        li{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+            border-bottom: 0.1px solid $purple-grey;
+            border-top: 0.1px solid $purple-grey;
+            padding: 0.5rem;
+
+            h4{
+                font-weight: lighter;
+            }
+
+            button{
+                background-color: $purple;
+                border-radius: 5px;
+                height: fit-content;
+                width: fit-content;
+                padding: 1rem;
+                color: $off-white;
+                border: none;
+            }
+        }
     }
+  }
+  
 }
