@@ -38,7 +38,7 @@ export default function ListRepo({}: Props) {
             setAvatar(response.data.user.avatar_url);
             setToken(response.data.token);
             localStorage.setItem("token", response.data.token);
-            console.log(response.data.token)
+            console.log(response.data.token);
           });
       }
     }
@@ -46,11 +46,12 @@ export default function ListRepo({}: Props) {
   const handleConnect = async (repo_name: string) => {
     // console.log(`https://api.github.com/repos/${repo_name}/hooks`);
     axios
-    .post(`http://localhost:5000/webhook/?link=https://api.github.com/repos/${repo_name}/hooks&token=${token}`)
-    .then((response) => {
-      console.log(response);
-    });
-  
+      .post(
+        `http://localhost:5000/webhook/?link=https://api.github.com/repos/${repo_name}/hooks&token=${token}`
+      )
+      .then((response) => {
+        console.log(response);
+      });
   };
 
   return (
