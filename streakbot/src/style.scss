@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
-$purple: #a31acb;
+$purple: #ff4471;
 $purple-grey: #a686ad;
 $off-white: #fff5ff;
 $black: #221824;
@@ -16,6 +18,7 @@ body {
   color: $off-white;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 .hero {
   display: flex;
@@ -23,18 +26,89 @@ body {
   align-items: center;
   flex-direction: column;
   height: 100vh;
+  margin-top: -1rem;
+
+  p {
+    font-size: 1rem;
+  }
+  h1 {
+    em {
+      background: linear-gradient(to right,#FF4471, #F6009E,#A31ACB);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;    }
+  }
+
+  b {
+    background: linear-gradient(to right,#FF4471, #F6009E,#A31ACB);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .code {
+    padding: 10px;
+    background-color: #443247;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    font-family: "Space Mono";
+  }
 
   button {
     font-family: inherit;
-    background-color: $purple;
     padding: 20px;
     border-radius: 5px;
+    font-size: 1rem;
     color: inherit;
     border: none;
     cursor: pointer;
+    background: linear-gradient(90deg, #ff4471, #f6009e);
   }
-  img {
-    margin-top: auto;
+
+  .glass1 {
+    display: flex;
+    position: absolute;
+    z-index: -500;
+    top: 0px;
+    left: 0px;
+    width: 25rem;
+    height: 25rem;
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+  }
+  .glass2 {
+    display: flex;
+    position: absolute;
+    z-index: -500;
+    bottom: 0px;
+    right: 0px;
+    width: 20rem;
+    height: 20rem;
+
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+  }
+  .blob1 {
+    position: absolute;
+    z-index: -1000;
+    top: 0px;
+    left: 0px;
+    width: 20rem;
+    height: 20rem;
+  }
+  .blob2 {
+    position: absolute;
+    z-index: -1000;
+    bottom: 0px;
+    right: 0px;
+    width: 15rem;
+    height: 15rem;
   }
 }
 .list {
@@ -43,63 +117,63 @@ body {
     padding: 0.2rem;
     justify-content: space-between;
     align-items: center;
-    background-color: $purple;
+    background: linear-gradient(to right,#FF4471, #F6009E,#A31ACB);
+
 
     h2 {
       padding-left: 1rem;
     }
     .profile {
-        display: flex;
-        padding-right: 1rem;
-        align-items: center;
-    
-        img{
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-        }
-    
-        // align-items: center;
+      display: flex;
+      padding-right: 1rem;
+      align-items: center;
+
+      img {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
       }
+
+      // align-items: center;
+    }
   }
-  .repos{
+  .repos {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    h2{
-        padding-left: 1rem;
+    h2 {
+      padding-left: 1rem;
     }
-    ul{
+    ul {
+      display: flex;
+      flex-direction: column;
+      width: 60%;
+      li {
         display: flex;
-        flex-direction: column;
-        width: 60%;
-        li{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            list-style: none;
-            border-bottom: 0.1px solid $purple-grey;
-            border-top: 0.1px solid $purple-grey;
-            padding: 0.5rem;
+        justify-content: space-between;
+        align-items: center;
+        list-style: none;
+        border-bottom: 0.1px solid rgba(255, 255, 255, 0.205);
+        padding: 0.5rem;
 
-            h4{
-                font-weight: lighter;
-            }
-
-            button{
-                background-color: $purple;
-                border-radius: 5px;
-                height: fit-content;
-                width: fit-content;
-                padding: 1rem;
-                color: $off-white;
-                border: none;
-            }
+        h4 {
+          font-weight: lighter;
         }
+
+        button {
+          background: linear-gradient(to left,#FF4471, #F6009E,#A31ACB);
+          border-radius: 5px;
+          height: fit-content;
+          width: fit-content;
+          padding: 1rem;
+          color: $off-white;
+          border: none;
+          font-size: 1rem;
+        }
+      }
     }
   }
-  
 }
