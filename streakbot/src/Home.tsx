@@ -16,7 +16,7 @@ export default function Home({}: Props) {
       <img className="blob blob1" src={blob} alt="wave" />
       <div className="glass2"></div>
       <img className="blob blob2" src={blob2} alt="wave" />
- 
+
       <h1>
         welcome to streakbot<em>.</em>
       </h1>
