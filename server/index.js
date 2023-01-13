@@ -132,6 +132,24 @@ app.post("/tweet", (req, res) => {
   }
 });
 
+// streakbot v2 routes
+app.post("/tweet/v2", (req, res) => {
+  const TwitterApi = require("twitter-api-v2").default;
+  const twitterClient = new TwitterApi({
+    clientId: "amIxZkk0Q1dBM1dqLTRZOERnRl86MTpjaQ",
+    clientSecret: "-ViLnWHf5hpSOdI6c4Km7dVjAkhLnDEoMqNmOhHv06JjQjpDQn",
+  });
+
+  const callbackURL = "http://127.0.0.1:5000/";
+
+  const { url, codeVerifier, state } = twitterClient.generateOAuth2AuthLink(
+    callbackURL,
+    { scope: ["tweet.read", "tweet.write", "users.read", "offline.access"] }
+  );
+
+  console.log({ codeVerifier, state });
+});
+
 //Listen
 app.listen(PORT, () => {
   console.log("Server is running...");
