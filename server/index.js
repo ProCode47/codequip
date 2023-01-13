@@ -6,7 +6,9 @@ const Oauth = require("./utils/Oauth");
 const axios = require("axios");
 const Twit = require("twit");
 const util = require("util");
+const dotenv = require("dotenv")
 
+dotenv.config()
 //Configuring Express
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -136,8 +138,8 @@ app.post("/tweet", (req, res) => {
 app.post("/tweet/v2", (req, res) => {
   const TwitterApi = require("twitter-api-v2").default;
   const twitterClient = new TwitterApi({
-    clientId: "amIxZkk0Q1dBM1dqLTRZOERnRl86MTpjaQ",
-    clientSecret: "-ViLnWHf5hpSOdI6c4Km7dVjAkhLnDEoMqNmOhHv06JjQjpDQn",
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
   });
 
   const callbackURL = "http://127.0.0.1:5000/";
