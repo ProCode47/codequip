@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@supabase/supabase-js": "^2.4.0",
     "axios": "^1.2.2",
     "clipboardy": "^3.0.0",
     "cors": "^2.8.5",

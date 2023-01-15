@@ -6,13 +6,24 @@ const Oauth = require("./utils/Oauth");
 const axios = require("axios");
 const Twit = require("twit");
 const util = require("util");
-const dotenv = require("dotenv")
+const dotenv = require("dotenv");
+const { createClient } = require("@supabase/supabase-js");
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_ANON
+);
 
-dotenv.config()
+dotenv.config();
 //Configuring Express
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+const callbackURL = "http://127.0.0.1:5000/";
+const TwitterApi = require("twitter-api-v2").default;
+const twitterClient = new TwitterApi({
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+});
 
 //test route
 // app.get("/test", (req, res) => {
@@ -135,21 +146,50 @@ app.post("/tweet", (req, res) => {
 });
 
 // streakbot v2 routes
-app.post("/tweet/v2", (req, res) => {
-  const TwitterApi = require("twitter-api-v2").default;
-  const twitterClient = new TwitterApi({
-    clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-  });
-
-  const callbackURL = "http://127.0.0.1:5000/";
-
+app.get("/tweet/v2", async (req, res) => {
   const { url, codeVerifier, state } = twitterClient.generateOAuth2AuthLink(
     callbackURL,
     { scope: ["tweet.read", "tweet.write", "users.read", "offline.access"] }
   );
+  res.redirect(url);
+  // console.log({ codeVerifier, state });
+  const { error } = await supabase
+    .from("codes")
+    .insert({ code_verifier: codeVerifier, state });
+  if (error) {
+    console.log(error);
+  }
+});
 
-  console.log({ codeVerifier, state });
+app.get("/", async (req, res) => {
+  const { code, state } = req.query;
+  // fetch code verifier from db
+  const { data, error } = await supabase
+    .from("codes")
+    .select()
+    .eq("state", state); 
+  // obtain  access tokens
+  if (!error) {
+    const codeVerifier = data[0].code_verifier;
+    const { client, accessToken, refreshToken } =
+      await twitterClient.loginWithOAuth2({
+        code,
+        codeVerifier,
+        redirectUri: callbackURL,
+      });
+    // save access tokens
+    const { error } = await supabase
+      .from("tokens")
+      .insert({ access: accessToken, refresh: refreshToken });
+    if (error) {
+      console.log(error);
+    } else {
+      res.send("sign in successful");
+    }
+  } else {
+    console.log("User state doesn't exist");
+    res.send({ saved_state_error: error });
+  }
 });
 
 //Listen

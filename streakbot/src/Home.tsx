@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import blob from "./assets/blobb.svg";
 import blob2 from "./assets/blobb2.svg";
 import blob3 from "./assets/blobb3.svg";
+import {FiTwitter, FiGithub} from 'react-icons/fi'
 
 type Props = {};
 
@@ -31,7 +32,9 @@ export default function Home({}: Props) {
       </p>
 
       <a href="https://github.com/login/oauth/authorize?allow_signup=true&client_id=78e4180c3b7b6aeb4ea7&redirect_uri=http://127.0.0.1:5173/authorized/streak&scope=public_repo">
-        <button>Connect with Github</button>
+        <span>
+        </span> <button>Connect to Twitter <FiTwitter style={{marginLeft:10}}/> </button>
+      <button>Connect with Github <FiGithub style={{marginLeft:10}}/> </button>
       </a>
     </div>
   );
