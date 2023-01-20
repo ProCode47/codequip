@@ -115,8 +115,9 @@ app.post("/webhook", (req, res) => {
   setHook();
 });
 
-// twitter routes
+// twitter-to-github routes
 app.post("/tweet", (req, res) => {
+  require('child_process').spawn('clip').stdin.end(util.inspect(req.body));
   const tweet = req.body.commits[0].message;
   const link = req.body.commits[0].url;
   if (tweet.includes("tweet:")) {
@@ -184,7 +185,7 @@ app.get("/", async (req, res) => {
     if (error) {
       console.log(error);
     } else {
-      res.send("sign in successful");
+      res.redirect("http://127.0.0.1:5173/authorized/streak");
     }
   } else {
     console.log("User state doesn't exist");

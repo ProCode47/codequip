@@ -2,6 +2,7 @@ import image from "./assets/boy.jfif";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { FiTwitter, FiGithub } from "react-icons/fi";
 
 type Props = {};
 
@@ -62,6 +63,13 @@ export default function ListRepo({}: Props) {
           <img src={avatar} alt="" />
           <h3>{name}</h3>
         </div>
+      </div>
+      <div className="connect_twitter">
+        <a href="http://localhost:5000/tweet/v2">
+          <button className="twitter_btn">
+            Connect with Twitter <FiTwitter style={{ marginLeft: 10 }} />{" "}
+          </button>
+        </a>
       </div>
       <div className="repos">
         <h2> Select a repository to connect to</h2>
