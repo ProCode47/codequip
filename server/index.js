@@ -94,7 +94,7 @@ app.post("/webhook", (req, res) => {
     active: true,
     events: ["push"],
     config: {
-      url: "https://1b30-197-210-85-112.eu.ngrok.io/tweet",
+      url: "https://8213-197-210-84-116.eu.ngrok.io/tweet",
       content_type: "json",
       insecure_ssl: "0",
     },
@@ -117,7 +117,8 @@ app.post("/webhook", (req, res) => {
 
 // twitter-to-github routes
 app.post("/tweet", (req, res) => {
-  require('child_process').spawn('clip').stdin.end(util.inspect(req.body));
+  require("child_process").spawn("clip").stdin.end(util.inspect(req.body));
+  // use req.body.sender.login for identifier
   const tweet = req.body.commits[0].message;
   const link = req.body.commits[0].url;
   if (tweet.includes("tweet:")) {
@@ -168,7 +169,7 @@ app.get("/", async (req, res) => {
   const { data, error } = await supabase
     .from("codes")
     .select()
-    .eq("state", state); 
+    .eq("state", state);
   // obtain  access tokens
   if (!error) {
     const codeVerifier = data[0].code_verifier;
@@ -185,14 +186,37 @@ app.get("/", async (req, res) => {
     if (error) {
       console.log(error);
     } else {
-      res.redirect("http://127.0.0.1:5173/authorized/streak");
+      res.redirect(
+        `http://127.0.0.1:5173/authorized/streak?access=${accessToken}`
+      );
     }
   } else {
     console.log("User state doesn't exist");
     res.send({ saved_state_error: error });
   }
 });
-
+app.post("/update", async (req, res) => {
+  const { token, login } = req.query;
+  // update row with login data
+  let update = {
+    login: login,
+  };
+  const { data, error } = await supabase
+    .from("tokens")
+    .select()
+    .eq("access", token);
+  if (!data[0].login) {
+    const { data, error } = await supabase
+      .from("tokens")
+      .update(update)
+      .eq("access", token);
+    if (!error) {
+      console.log("Update successful");
+    } else {
+      console.log(error);
+    }
+  }
+});
 //Listen
 app.listen(PORT, () => {
   console.log("Server is running...");
