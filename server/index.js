@@ -123,7 +123,7 @@ app.post("/tweet", async (req, res) => {
   const author = req.body.sender.login;
   const { data, error } = await supabase
     .from("tokens")
-    .select("access", "refresh")
+    .select("access, refresh")
     .order("id", { ascending: false })
     .eq("login", author)
     .limit(1);
