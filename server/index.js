@@ -110,7 +110,12 @@ app.post("/webhook", (req, res) => {
   const setHook = async () => {
     const response = await axios.post(link, data, headers);
     // console.log(response);
-    res.json(response.data);
+    if (response.header != 200) {
+      res.json("You've already added this repo to your Streakbot!");
+
+    } else {
+      res.json("success");
+    }
   };
   setHook();
 });

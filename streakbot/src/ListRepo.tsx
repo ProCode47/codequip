@@ -81,13 +81,23 @@ export default function ListRepo({}: Props) {
         )
         .then((response) => {
           // console.log(response);
-          toast.success("Success!", {
-            closeButton: false,
-            autoClose:2500,
-            onClose: () => {
-              navigate("/streaker");
-            },
-          });
+          if ((response.data != "success")) {
+            toast.info("You've already added this repo to your Streakbot!", {
+              closeButton: false,
+              autoClose: 2500,
+              onClose: () => {
+                navigate("/streaker");
+              },
+            });
+          } else {
+            toast.success("Success!", {
+              closeButton: false,
+              autoClose: 2500,
+              onClose: () => {
+                navigate("/streaker");
+              },
+            });
+          }
         });
     } else {
       toast.warning("Please connect your Twitter account", {
