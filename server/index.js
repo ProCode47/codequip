@@ -117,6 +117,7 @@ app.post("/webhook", (req, res) => {
 
 // github-to-twitter routes
 app.post("/tweet", async (req, res) => {
+  console.log("Ping")
   const tweet = req.body.commits[0].message;
   const link = req.body.commits[0].url;
   // require("child_process").spawn("clip").stdin.end(util.inspect(req.body));
