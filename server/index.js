@@ -203,23 +203,13 @@ app.post("/update", async (req, res) => {
   let update = {
     login: login,
   };
-  const { error } = await supabase.from("tokens").delete().eq("login", login);
-  if (error || !error) {
+  const { err } = await supabase.from("tokens").delete().eq("login", login);
     const { data, error } = await supabase
       .from("tokens")
-      .select()
+      .update(update)
       .eq("access", token);
-    if (!data[0].login) {
-      const { data, error } = await supabase
-        .from("tokens")
-        .update(update)
-        .eq("access", token);
-      if (!error) {
-        console.log("Update successful");
-      } else {
-        console.log(error);
-      }
-    }
+    if (!error) {
+      console.log("update success")
   }
 });
 //Listen
