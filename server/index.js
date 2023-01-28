@@ -115,36 +115,50 @@ app.post("/webhook", (req, res) => {
   setHook();
 });
 
-// twitter-to-github routes
-app.post("/tweet", (req, res) => {
-  require("child_process").spawn("clip").stdin.end(util.inspect(req.body));
+// github-to-twitter- routes
+app.post("/tweet", async (req, res) => {
+  // require("child_process").spawn("clip").stdin.end(util.inspect(req.body));
   // use req.body.sender.login for identifier
-  const tweet = req.body.commits[0].message;
-  const link = req.body.commits[0].url;
-  if (tweet.includes("tweet:")) {
-    const updatedTweet = tweet.replace("tweet:", "");
-    const Twitter = new Twit({
-      consumer_key: "9u3FA6YzQaCkBj0I2zL3KnZdZ",
-      consumer_secret: "OJz4FqXtbw9PMxyRSIMeKYvMqf67KeO49YXtdzsJczWKA33kv8",
-      access_token: "1468834737829474305-mlxfdT7a0LZ6lWiT3DuxtngBag3TJD",
-      access_token_secret: "xbmT46GIcde04BeQgUZT2el8aoYOr9Xh3JUAE2fUkHd2j",
-      timeout_ms: 60 * 1000, // optional HTTP request timeout to apply to all requests.
-    });
-
-    var params = {
-      status: `#automatedbystreakbot \n ${updatedTweet} \n ${link}`,
-    };
-
-    function tweetResult(err, data, response) {
-      if (err) {
-        console.log({ err });
-      } else {
-        console.log("tweet successful");
-      }
-    }
-
-    Twitter.post("statuses/update", params, tweetResult);
+  // find the access/ refresh tokens for user
+  const author = req.body.sender.login;
+  const { data, error } = await supabase
+    .from("tokens")
+    .select("access", "refresh")
+    .order("id", { ascending: false })
+    .eq("login", author)
+    .limit(1);
+  if (err) {
+    console.log(error);
+  } else {
+    console.log(data);
   }
+
+  // const tweet = req.body.commits[0].message;
+  // const link = req.body.commits[0].url;
+  // if (tweet.includes("tweet:")) {
+  //   const updatedTweet = tweet.replace("tweet:", "");
+  //   const Twitter = new Twit({
+  //     consumer_key: "9u3FA6YzQaCkBj0I2zL3KnZdZ",
+  //     consumer_secret: "OJz4FqXtbw9PMxyRSIMeKYvMqf67KeO49YXtdzsJczWKA33kv8",
+  //     access_token: "1468834737829474305-mlxfdT7a0LZ6lWiT3DuxtngBag3TJD",
+  //     access_token_secret: "xbmT46GIcde04BeQgUZT2el8aoYOr9Xh3JUAE2fUkHd2j",
+  //     timeout_ms: 60 * 1000, // optional HTTP request timeout to apply to all requests.
+  //   });
+
+  //   var params = {
+  //     status: `#automatedbystreakbot \n ${updatedTweet} \n ${link}`,
+  //   };
+
+  //   function tweetResult(err, data, response) {
+  //     if (err) {
+  //       console.log({ err });
+  //     } else {
+  //       console.log("tweet successful");
+  //     }
+  //   }
+
+  //   Twitter.post("statuses/update", params, tweetResult);
+  // }
 });
 
 // streakbot v2 routes
