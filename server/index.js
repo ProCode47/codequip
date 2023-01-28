@@ -129,7 +129,7 @@ app.post("/tweet", async (req, res) => {
     .order("id", { ascending: false })
     .eq("login", author)
     .limit(1);
-  let refresh = data[0].refresh;
+  const {refresh} = data[0];
   const { client, accessToken, refreshToken } =
     await twitterClient.refreshOAuth2Token(refresh);
   const { err } = await supabase
@@ -142,7 +142,7 @@ app.post("/tweet", async (req, res) => {
     const { data: tweetData } = await client.v2.tweet(
       `#automatedbystreakbot \n ${updatedTweet} \n ${link}`
     );
-    console.log(tweetData);
+    console.log("tweet successful");
   }
 });
 
