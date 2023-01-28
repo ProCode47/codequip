@@ -94,7 +94,7 @@ app.post("/webhook", (req, res) => {
     active: true,
     events: ["push"],
     config: {
-      url: "https://8213-197-210-84-116.eu.ngrok.io/tweet",
+      url: "https://9ec4-197-210-85-40.eu.ngrok.io/tweet",
       content_type: "json",
       insecure_ssl: "0",
     },
