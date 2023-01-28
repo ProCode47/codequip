@@ -129,9 +129,7 @@ app.post("/tweet", async (req, res) => {
     .order("id", { ascending: false })
     .eq("login", author)
     .limit(1);
-  // const {refresh} = data[0];
-  console.log(data)
-  console.log(data[0])
+  const refresh = data[0].refresh;
   const { client, accessToken, refreshToken } =
     await twitterClient.refreshOAuth2Token(refresh);
   const { err } = await supabase
