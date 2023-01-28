@@ -127,7 +127,7 @@ app.post("/tweet", async (req, res) => {
     .order("id", { ascending: false })
     .eq("login", author)
     .limit(1);
-  if (err) {
+  if (error) {
     console.log(error);
   } else {
     console.log(data);
