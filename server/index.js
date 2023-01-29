@@ -94,7 +94,7 @@ app.post("/webhook", (req, res) => {
     active: true,
     events: ["push"],
     config: {
-      url: "https://8b65-197-210-85-40.eu.ngrok.io/tweet",
+      url: "https://9b05-197-210-226-92.eu.ngrok.io/tweet",
       content_type: "json",
       insecure_ssl: "0",
     },
@@ -123,11 +123,11 @@ app.post("/webhook", (req, res) => {
 
 // github-to-twitter routes
 app.post("/tweet", async (req, res) => {
+  require("child_process").spawn("clip").stdin.end(util.inspect(req.body));
   console.log("Ping");
   if (req.body.commits) {
     const tweet = req.body.commits[0].message;
     const link = req.body.commits[0].url;
-    // require("child_process").spawn("clip").stdin.end(util.inspect(req.body));
     const author = req.body.sender.login;
     // find the refresh tokens for user and generate new token
     const { data, error } = await supabase
