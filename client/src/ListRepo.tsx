@@ -85,9 +85,6 @@ export default function ListRepo({}: Props) {
             toast.info("You've already added this repo to your Streakbot!", {
               closeButton: false,
               autoClose: 2500,
-              onClose: () => {
-                navigate("/streaker");
-              },
             });
           } else {
             toast.success("Success!", {

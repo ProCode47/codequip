@@ -108,13 +108,14 @@ app.post("/webhook", (req, res) => {
     },
   };
   const setHook = async () => {
-    const response = await axios.post(link, data, headers);
-    // console.log(response);
-    if (response.header != 200) {
+    try {
+      const response = await axios.post(link, data, headers);
+      // console.log(response);
+      if (response.header != 200) {
+        res.json("success");
+      }
+    } catch (error) {
       res.json("You've already added this repo to your Streakbot!");
-
-    } else {
-      res.json("success");
     }
   };
   setHook();
@@ -122,33 +123,36 @@ app.post("/webhook", (req, res) => {
 
 // github-to-twitter routes
 app.post("/tweet", async (req, res) => {
-  console.log("Ping")
-  const tweet = req.body.commits[0].message;
-  const link = req.body.commits[0].url;
-  // require("child_process").spawn("clip").stdin.end(util.inspect(req.body));
-  const author = req.body.sender.login;
-  // find the refresh tokens for user and generate new token
-  const { data, error } = await supabase
-    .from("tokens")
-    .select("access, refresh")
-    .order("id", { ascending: false })
-    .eq("login", author)
-    .limit(1);
-  const refresh = data[0].refresh;
-  const { client, accessToken, refreshToken } =
-    await twitterClient.refreshOAuth2Token(refresh);
-  const { err } = await supabase
-    .from("tokens")
-    .update({ access: accessToken, refresh: refreshToken })
-    .eq("login", author);
-  // console.log(data);
-  if (tweet.includes("tweet:")) {
-    const updatedTweet = tweet.replace("tweet:", "");
-    const { data: tweetData } = await client.v2.tweet(
-      `#automatedbystreakbot \n ${updatedTweet} \n ${link}`
-    );
-    console.log("tweet successful");
+  console.log("Ping");
+  if (req.body.commits) {
+    const tweet = req.body.commits[0].message;
+    const link = req.body.commits[0].url;
+    // require("child_process").spawn("clip").stdin.end(util.inspect(req.body));
+    const author = req.body.sender.login;
+    // find the refresh tokens for user and generate new token
+    const { data, error } = await supabase
+      .from("tokens")
+      .select("access, refresh")
+      .order("id", { ascending: false })
+      .eq("login", author)
+      .limit(1);
+    const refresh = data[0].refresh;
+    const { client, accessToken, refreshToken } =
+      await twitterClient.refreshOAuth2Token(refresh);
+    const { err } = await supabase
+      .from("tokens")
+      .update({ access: accessToken, refresh: refreshToken })
+      .eq("login", author);
+    // console.log(data);
+    if (tweet.includes("tweet:")) {
+      const updatedTweet = tweet.replace("tweet:", "");
+      const { data: tweetData } = await client.v2.tweet(
+        `#automatedbystreakbot \n ${updatedTweet} \n ${link}`
+      );
+      console.log("tweet successful");
+    }
   }
+
 });
 
 // streakbot v2 routes
@@ -207,12 +211,12 @@ app.post("/update", async (req, res) => {
     login: login,
   };
   const { err } = await supabase.from("tokens").delete().eq("login", login);
-    const { data, error } = await supabase
-      .from("tokens")
-      .update(update)
-      .eq("access", token);
-    if (!error) {
-      console.log("update success")
+  const { data, error } = await supabase
+    .from("tokens")
+    .update(update)
+    .eq("access", token);
+  if (!error) {
+    console.log("update success");
   }
 });
 //Listen
