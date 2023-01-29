@@ -175,6 +175,11 @@ body {
           color: $off-white;
           border: none;
           font-size: 1rem;
+          &:active{
+            background: linear-gradient(90deg, #f6009e, #ff4471);
+            margin-bottom: -5px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+          }
         }
       }
     }
@@ -198,6 +203,14 @@ body {
       border: none;
       cursor: pointer;
       background: linear-gradient(90deg, #ff4471, #f6009e);
+      &:hover {
+        box-shadow: rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px;
+      }
+      &:active{
+        box-shadow: rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px;
+        background: linear-gradient(90deg, #f6009e, #ff4471);
+        transform: translateY(5px);
+      }
   }
   }
  

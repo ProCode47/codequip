@@ -6,6 +6,7 @@ import { FiTwitter, FiGithub } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { Bars, RevolvingDot } from "react-loader-spinner";
 
 type Props = {};
 
@@ -81,7 +82,7 @@ export default function ListRepo({}: Props) {
         )
         .then((response) => {
           // console.log(response);
-          if ((response.data != "success")) {
+          if (response.data != "success") {
             toast.info("You've already added this repo to your Streakbot!", {
               closeButton: false,
               autoClose: 2500,
@@ -109,8 +110,24 @@ export default function ListRepo({}: Props) {
       <div className="header">
         <h2>Setup Streakbot</h2>
         <div className="profile">
-          <img src={avatar} alt="" />
-          <h3>{name}</h3>
+          {avatar ? (
+            <>
+              <img src={avatar} alt="" />
+              <h3>{name}</h3>
+            </>
+          ) : (
+            <RevolvingDot
+              height="100"
+              width="100"
+              radius={20}
+              color="#fff"
+              secondaryColor=""
+              ariaLabel="revolving-dot-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+            />
+          )}
         </div>
       </div>
       <div className="connect_twitter">
@@ -123,18 +140,30 @@ export default function ListRepo({}: Props) {
       </div>
       <div className="repos">
         <h2> Select a repository to connect to</h2>
-        <ul>
-          {repos.map((repo: any, index: number) => {
-            return (
-              <li key={index}>
-                <h4>{repo.full_name}</h4>
-                <button onClick={() => handleConnect(repo.full_name)}>
-                  Connect
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+        {avatar ? (
+          <ul>
+            {repos.map((repo: any, index: number) => {
+              return (
+                <li key={index}>
+                  <h4>{repo.full_name}</h4>
+                  <button onClick={() => handleConnect(repo.full_name)}>
+                    Connect
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <Bars
+            height="100"
+            width="100"
+            color="#fff"
+            ariaLabel="bars-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        )}
       </div>
     </div>
   );
