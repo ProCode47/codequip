@@ -1,7 +1,7 @@
 {
     ref: 'refs/heads/master',
-    before: 'be94f87ad1ed0b60d9c9a8ee1e0b7df2cbeecc08',
-    after: '8ae0c606b694fa1b5afc635e478631d3ad74f9c0',
+    before: '8ae0c606b694fa1b5afc635e478631d3ad74f9c0',
+    after: 'd091a7bc17d23f7254fc5a38757ff93f92da0785',
     repository: {
       id: 585730360,
       node_id: 'R_kgDOIumJOA',
@@ -72,7 +72,7 @@
       deployments_url: 'https://api.github.com/repos/ProCode47/streakBot/deployments',
       created_at: 1672961150,
       updated_at: '2023-01-29T12:26:52Z',
-      pushed_at: 1674996834,
+      pushed_at: 1674997351,
       git_url: 'git://github.com/ProCode47/streakBot.git',
       ssh_url: 'git@github.com:ProCode47/streakBot.git',
       clone_url: 'https://github.com/ProCode47/streakBot.git',
@@ -131,29 +131,29 @@
     deleted: false,
     forced: false,
     base_ref: null,
-    compare: 'https://github.com/ProCode47/streakBot/compare/be94f87ad1ed...8ae0c606b694',
+    compare: 'https://github.com/ProCode47/streakBot/compare/8ae0c606b694...d091a7bc17d2',
     commits: [
       {
-        id: '8ae0c606b694fa1b5afc635e478631d3ad74f9c0',
-        tree_id: 'da5a5b7875fb63f89419f6188eda8129a9c7c509',
+        id: 'd091a7bc17d23f7254fc5a38757ff93f92da0785',
+        tree_id: 'a0f0b83526848a49bc4df719bf635b88e2330fed',
         distinct: true,
         message: 'test',
-        timestamp: '2023-01-29T13:54:36+01:00',
-        url: 'https://github.com/ProCode47/streakBot/commit/8ae0c606b694fa1b5afc635e478631d3ad74f9c0',
+        timestamp: '2023-01-29T14:03:14+01:00',
+        url: 'https://github.com/ProCode47/streakBot/commit/d091a7bc17d23f7254fc5a38757ff93f92da0785',
         author: [Object],
         committer: [Object],
         added: [Array],
-        removed: [],
+        removed: [Array],
         modified: [Array]
       }
     ],
     head_commit: {
-      id: '8ae0c606b694fa1b5afc635e478631d3ad74f9c0',
-      tree_id: 'da5a5b7875fb63f89419f6188eda8129a9c7c509',
+      id: 'd091a7bc17d23f7254fc5a38757ff93f92da0785',
+      tree_id: 'a0f0b83526848a49bc4df719bf635b88e2330fed',
       distinct: true,
       message: 'test',
-      timestamp: '2023-01-29T13:54:36+01:00',
-      url: 'https://github.com/ProCode47/streakBot/commit/8ae0c606b694fa1b5afc635e478631d3ad74f9c0',
+      timestamp: '2023-01-29T14:03:14+01:00',
+      url: 'https://github.com/ProCode47/streakBot/commit/d091a7bc17d23f7254fc5a38757ff93f92da0785',
       author: {
         name: 'procode47',
         email: 'iloenyenwavictor@gmail.com',
@@ -164,8 +164,8 @@
         email: 'iloenyenwavictor@gmail.com',
         username: 'ProCode47'
       },
-      added: [ 'streakshot.jfif' ],
-      removed: [],
-      modified: [ 'client/src/ListRepo.tsx' ]
+      added: [ 'server/utils/streakshot.jfif' ],
+      removed: [ 'streakshot.jfif' ],
+      modified: [ 'server/res.json' ]
     }
   }

@@ -18,7 +18,7 @@ dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-const callbackURL = "http://127.0.0.1:5000/";
+const callbackURL = "https://streakbotbeta.netlify.app";
 const TwitterApi = require("twitter-api-v2").default;
 const twitterClient = new TwitterApi({
   clientId: process.env.CLIENT_ID,
@@ -195,7 +195,7 @@ app.get("/", async (req, res) => {
       console.log(error);
     } else {
       res.redirect(
-        `http://127.0.0.1:5173/authorized/streak?access=${accessToken}`
+        `https://streakbotbeta.netlify.app/authorized/streak?access=${accessToken}`
       );
     }
   } else {
