@@ -94,7 +94,7 @@ app.post("/webhook", (req, res) => {
     active: true,
     events: ["push"],
     config: {
-      url: "https://9b05-197-210-226-92.eu.ngrok.io/tweet",
+      url: "https://streakbot.onrender.com/tweet",
       content_type: "json",
       insecure_ssl: "0",
     },
