@@ -18,7 +18,7 @@ dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-const callbackURL = "https://streakbotbeta.netlify.app";
+const callbackURL = "https://streakbotbeta.netlify.app/";
 const TwitterApi = require("twitter-api-v2").default;
 const twitterClient = new TwitterApi({
   clientId: process.env.CLIENT_ID,
