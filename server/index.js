@@ -18,7 +18,7 @@ dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-const callbackURL = "https://streakbot.onrender.com";
+const callbackURL = "https://streakbot.onrender.com/tweetauth";
 const TwitterApi = require("twitter-api-v2").default;
 const twitterClient = new TwitterApi({
   clientId: process.env.CLIENT_ID,
@@ -26,9 +26,9 @@ const twitterClient = new TwitterApi({
 });
 
 //test route
-// app.get("/test", (req, res) => {
-//   res.send("Aye mate");
-// });
+app.get("/health", (req, res) => {
+  res.send("Aye mate").status(200);
+});
 
 // github routes
 app.post("/auth", (req, res) => {
@@ -171,7 +171,7 @@ app.get("/tweet/v2", async (req, res) => {
   }
 });
 
-app.get("/", async (req, res) => {
+app.get("/tweetauth", async (req, res) => {
   const { code, state } = req.query;
   // fetch code verifier from db
   const { data, error } = await supabase
