@@ -116,6 +116,7 @@ app.post("/webhook", (req, res) => {
       }
     } catch (error) {
       res.json("You've already added this repo to your Streakbot!");
+      console.log("beep")
     }
   };
   setHook();
