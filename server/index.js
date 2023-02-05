@@ -152,7 +152,6 @@ app.post("/tweet", async (req, res) => {
       console.log("tweet successful");
     }
   }
-
 });
 
 // streakbot v2 routes
