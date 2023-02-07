@@ -116,7 +116,7 @@ app.post("/webhook", (req, res) => {
       }
     } catch (error) {
       res.json("You've already added this repo to your Streakbot!");
-      console.log("beep")
+      console.log("beep");
     }
   };
   setHook();
@@ -124,7 +124,7 @@ app.post("/webhook", (req, res) => {
 
 // github-to-twitter routes
 app.post("/tweet", async (req, res) => {
-  console.log("Ping");
+  console.log("Hit the tweet route... I wonder what goes wrong");
   if (req.body.commits) {
     const tweet = req.body.commits[0].message;
     const link = req.body.commits[0].url;
