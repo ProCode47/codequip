@@ -12,6 +12,7 @@ type Props = {};
 
 export default function ListRepo({}: Props) {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
   const [repos, setRepo] = useState<any>([]);
   const [name, setName] = useState<string>("");
   const [avatar, setAvatar] = useState<string>("");
@@ -62,7 +63,9 @@ export default function ListRepo({}: Props) {
         const access = new URLSearchParams(search).get("access");
         if (access) {
           axios
-            .post(`https://streakbot.onrender.com/update/?token=${access}&login=${name}`)
+            .post(
+              `https://streakbot.onrender.com/update/?token=${access}&login=${name}`
+            )
             .then((response) => {
               console.log(response);
             });
@@ -73,9 +76,14 @@ export default function ListRepo({}: Props) {
       }
     }
   }, [name]);
-  const handleConnect = async (repo_name: string) => {
+  const handleConnect = async (event: any,repo_name: string) => {
     // console.log(`https://api.github.com/repos/${repo_name}/hooks`);
     if (connectStatus) {
+      setLoading(true);
+      toast.info("Setting up... please wait", {
+        closeButton: false,
+        autoClose: 2500,
+      });
       axios
         .post(
           `https://streakbot.onrender.com/webhook/?link=https://api.github.com/repos/${repo_name}/hooks&token=${token}`
@@ -83,6 +91,7 @@ export default function ListRepo({}: Props) {
         .then((response) => {
           // console.log(response);
           if (response.data != "success") {
+            setLoading(false)
             toast.info("You've already added this repo to your Streakbot!", {
               closeButton: false,
               autoClose: 2500,
@@ -105,8 +114,7 @@ export default function ListRepo({}: Props) {
   };
 
   return (
-    <div className="list">
-      <ToastContainer style={{ width: "fit-content", paddingRight: "10px" }} />
+    <div className="list reduce-font">
       <div className="header">
         <h2>Setup Streakbot</h2>
         <div className="profile">
@@ -141,13 +149,13 @@ export default function ListRepo({}: Props) {
       <div className="repos">
         <h2> Select a repository to connect to</h2>
         {avatar ? (
-          <ul>
+          <ul className="w-full">
             {repos.map((repo: any, index: number) => {
               return (
                 <li key={index}>
                   <h4>{repo.full_name}</h4>
-                  <button onClick={() => handleConnect(repo.full_name)}>
-                    Connect
+                  <button disabled={loading}  onClick={() => handleConnect(event,repo.full_name)}>
+                      Connect
                   </button>
                 </li>
               );

@@ -12,7 +12,7 @@ export default function Home({}: Props) {
   // localStorage.clear()
 
   return (
-    <div className="hero">
+    <div className="hero padding-sm">
       <div className="glass1"></div>
       <img className="blob blob1" src={blob} alt="wave" />
       <div className="glass2"></div>

@@ -1,0 +1,38 @@
+
+@media only screen and (max-width: 992px){
+
+    .column-sm{
+        display: flex !important;
+        width: 100% !important;
+        align-items: center;
+        flex-direction: column !important;
+        transform: translateY(10px) !important;
+    }
+    .item-sm{
+        margin-bottom: 15px;
+        width: 85% !important;
+    }
+    .header-sm{
+        height: 21vh !important;
+        padding: 15px;
+    }
+    .wrapper-sm{
+        height: 50% !important;
+    }
+    .card-sm{
+        width: 80% !important;
+        height: 50vh !important;
+    }
+    .padding-sm{
+        padding: 2rem !important;
+    }
+    .reduce-font{
+        font-size: .8rem !important;
+    }
+    .w-full{
+        width: 90% !important;
+    }
+
+    
+    
+}

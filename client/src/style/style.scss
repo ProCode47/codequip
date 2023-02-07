@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import "responsive";
 
 $purple: #ff4471;
 $purple-grey: #a686ad;
@@ -24,6 +25,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   flex-direction: column;
   height: 100vh;
   margin-top: -1rem;
@@ -55,8 +57,7 @@ body {
   }
 
   button {
-    margin-right: 1rem;
-    margin-top: .5rem;
+    margin-top: 1rem;
     font-family: inherit;
     padding: 20px;
     border-radius: 5px;
@@ -147,12 +148,13 @@ body {
     align-items: center;
 
     h2 {
-      padding-left: 1rem;
+      padding-left: 0rem;
     }
     ul {
       display: flex;
       flex-direction: column;
       width: 60%;
+      padding: 1rem;
       li {
         display: flex;
         justify-content: space-between;
@@ -163,6 +165,8 @@ body {
 
         h4 {
           font-weight: lighter;
+          font-size: 1rem;
+          padding: 1rem;
         }
 
         button {
@@ -170,6 +174,7 @@ body {
           border-radius: 5px;
           height: fit-content;
           width: fit-content;
+          margin-left: auto;
           padding: 1rem;
           cursor: pointer;
           color: $off-white;
@@ -198,7 +203,7 @@ body {
       font-family: inherit;
       padding: 20px;
       border-radius: 5px;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: inherit;
       border: none;
       cursor: pointer;
