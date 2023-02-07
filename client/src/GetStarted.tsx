@@ -12,7 +12,7 @@ export default function GetStarted({}: Props) {
   // localStorage.clear()
 
   return (
-    <div className="hero">
+    <div className="hero padding-sm">
       <div className="glass1"></div>
       <img className="blob blob1" src={blob} alt="wave" />
       <div className="glass2"></div>
@@ -24,8 +24,8 @@ export default function GetStarted({}: Props) {
       </h3>
       <p className="code">
         git commit -m "tweet: I just added this amazing feature that I had to
-        share!" <br /> git commit -m "tweet: If you haven't tried out Streakbot,
-        you're missing out fr!" <br /> git commit -m "tweet: it's the best thing
+        share!" <br /><br /> git commit -m "tweet: If you haven't tried out Streakbot,
+        you're missing out fr!" <br /><br /> git commit -m "tweet: it's the best thing
         since sliced bread... or pringles"
       </p>
     </div>
