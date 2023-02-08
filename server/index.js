@@ -136,21 +136,25 @@ app.post("/tweet", async (req, res) => {
       .order("id", { ascending: false })
       .eq("login", author)
       .limit(1);
-    const refresh = data[0].refresh;
-    const { client, accessToken, refreshToken } =
-      await twitterClient.refreshOAuth2Token(refresh);
-    const { err } = await supabase
-      .from("tokens")
-      .update({ access: accessToken, refresh: refreshToken })
-      .eq("login", author);
-    // console.log(data);
-    if (tweet.includes("tweet:")) {
-      const updatedTweet = tweet.replace("tweet:", "");
-      const { data: tweetData } = await client.v2.tweet(
-        `#automatedbystreakbot \n ${updatedTweet} \n ${link}`
-      );
-      console.log("tweet successful");
-    }
+      if (data[0].refresh){
+        const refresh = data[0].refresh;
+        const { client, accessToken, refreshToken } =
+          await twitterClient.refreshOAuth2Token(refresh);
+        const { err } = await supabase
+          .from("tokens")
+          .update({ access: accessToken, refresh: refreshToken })
+          .eq("login", author);
+        // console.log(data);
+        if (tweet.includes("tweet:")) {
+          const updatedTweet = tweet.replace("tweet:", "");
+          const { data: tweetData } = await client.v2.tweet(
+            `#automatedbystreakbot \n ${updatedTweet} \n ${link}`
+          );
+          console.log("tweet successful");
+        }
+      } else {
+        console.log("No Twitter Keys Found")
+      }
   }
 });
 
