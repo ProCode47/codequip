@@ -162,7 +162,7 @@ app.post("/tweet", async (req, res) => {
 app.get("/tweet/v2", async (req, res) => {
   const { url, codeVerifier, state } = twitterClient.generateOAuth2AuthLink(
     callbackURL,
-    { scope: ["tweet.read", "tweet.write", "users.read", "offline.access"] }
+    { scope: ["tweet.read", "tweet.write", "users.read", "offline.access","like.write"] }
   );
   res.redirect(url);
   // console.log({ codeVerifier, state });
