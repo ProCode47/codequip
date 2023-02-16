@@ -169,7 +169,7 @@ app.get("/tweet/v2", async (req, res) => {
         "users.read",
         "offline.access",
         "like.write",
-        "like.read"
+        "like.read",
       ],
     }
   );
@@ -202,6 +202,10 @@ app.get("/tweetauth", async (req, res) => {
     // save access tokens
     const { error } = await supabase
       .from("tokens")
+      .insert({ access: accessToken, refresh: refreshToken });
+    // save access tokens to job_tokens as well
+    const { err } = await supabase
+      .from("job_tokens")
       .insert({ access: accessToken, refresh: refreshToken });
     if (error) {
       console.log(error);
