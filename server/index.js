@@ -18,7 +18,7 @@ dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-const callbackURL = "https://streakbot.onrender.com/tweetauth";
+const callbackURL = "https://streakbotx.onrender.com/tweetauth";
 const TwitterApi = require("twitter-api-v2").default;
 const twitterClient = new TwitterApi({
   clientId: process.env.CLIENT_ID,
@@ -94,7 +94,7 @@ app.post("/webhook", (req, res) => {
     active: true,
     events: ["push"],
     config: {
-      url: "https://streakbot.onrender.com/tweet",
+      url: "https://streakbotx.onrender.com/tweet",
       content_type: "json",
       insecure_ssl: "0",
     },
