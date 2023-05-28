@@ -26,9 +26,9 @@ export default function ListRepo({}: Props) {
     if (saved_token) {
       // logged in
       axios
-        .post(`https://streakbotx.onrender.com/loggedin/?token=${saved_token}`)
+        .post(`http://localhost:5000/loggedin/?token=${saved_token}`)
         .then((response) => {
-          // console.log(response);
+          console.log(response);
           setRepo(response.data.repos);
           setName(response.data.user.login);
           setAvatar(response.data.user.avatar_url);
@@ -39,9 +39,9 @@ export default function ListRepo({}: Props) {
       const code = new URLSearchParams(search).get("code");
       if (code) {
         axios
-          .post(`https://streakbotx.onrender.com/auth/?code=${code}`)
+          .post(`http://localhost:5000/auth/?code=${code}`)
           .then((response) => {
-            // console.log(response);
+            console.log(response);
             setRepo(response.data.repos);
             setName(response.data.user.login);
             setAvatar(response.data.user.avatar_url);
@@ -64,7 +64,7 @@ export default function ListRepo({}: Props) {
         if (access) {
           axios
             .post(
-              `https://streakbotx.onrender.com/update/?token=${access}&login=${name}`
+              `http://localhost:5000/update/?token=${access}&login=${name}`
             )
             .then((response) => {
               console.log(response);
@@ -86,10 +86,10 @@ export default function ListRepo({}: Props) {
       });
       axios
         .post(
-          `https://streakbotx.onrender.com/webhook/?link=https://api.github.com/repos/${repo_name}/hooks&token=${token}`
+          `http://localhost:5000/webhook/?link=https://api.github.com/repos/${repo_name}/hooks&token=${token}`
         )
         .then((response) => {
-          // console.log(response);
+          console.log(response);
           if (response.data != "success") {
             setLoading(false)
             toast.info("You've already added this repo to your Streakbot!", {
@@ -139,7 +139,7 @@ export default function ListRepo({}: Props) {
         </div>
       </div>
       <div className="connect_twitter">
-        <a href="https://streakbotx.onrender.com/tweet/v2">
+        <a href="http://localhost:5000/tweet/v2">
           <button className="twitter_btn">
             {connectStatus ? "Connected" : "Connect with Twitter"}{" "}
             <FiTwitter style={{ marginLeft: 10 }} />{" "}

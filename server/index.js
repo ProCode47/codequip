@@ -18,7 +18,7 @@ dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-const callbackURL = "https://streakbotx.onrender.com/tweetauth";
+const callbackURL = "http://127.0.0.1:5000/tweetauth";
 const TwitterApi = require("twitter-api-v2").default;
 const twitterClient = new TwitterApi({
   clientId: process.env.CLIENT_ID,
@@ -86,7 +86,8 @@ app.post("/loggedin", (req, res) => {
 
   getUserInfo();
 });
-app.post("/webhook", (req, res) => {
+app.post("/webhook", (req, res) =>
+{
   const link = req.query.link;
   const token = req.query.token;
   const data = {
@@ -211,7 +212,7 @@ app.get("/tweetauth", async (req, res) => {
       console.log(error);
     } else {
       res.redirect(
-        `https://streakbotbeta.netlify.app/authorized/streak?access=${accessToken}`
+        `http://127.0.0.1:5173/authorized/streak?access=${accessToken}`
       );
     }
   } else {

@@ -31,7 +31,7 @@ export default function Home({}: Props) {
         share!"
       </p>
       <span>
-        <a href="https://github.com/login/oauth/authorize?allow_signup=true&client_id=78e4180c3b7b6aeb4ea7&redirect_uri=https://streakbotbeta.netlify.app/authorized/streak&scope=public_repo">
+        <a href="https://github.com/login/oauth/authorize?allow_signup=true&client_id=78e4180c3b7b6aeb4ea7&redirect_uri=http://127.0.0.1:5173/authorized/streak&scope=public_repo">
           <button>
             Connect with Github <FiGithub style={{ marginLeft: 10 }} />{" "}
           </button>
