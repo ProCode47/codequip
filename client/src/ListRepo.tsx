@@ -26,7 +26,7 @@ export default function ListRepo({}: Props) {
     if (saved_token) {
       // logged in
       axios
-        .post(`http://localhost:5000/loggedin/?token=${saved_token}`)
+        .post(`https://streakbotx.onrender.com/loggedin/?token=${saved_token}`)
         .then((response) => {
           console.log(response);
           setRepo(response.data.repos);
@@ -39,7 +39,7 @@ export default function ListRepo({}: Props) {
       const code = new URLSearchParams(search).get("code");
       if (code) {
         axios
-          .post(`http://localhost:5000/auth/?code=${code}`)
+          .post(`https://streakbotx.onrender.com/auth/?code=${code}`)
           .then((response) => {
             console.log(response);
             setRepo(response.data.repos);
@@ -64,7 +64,7 @@ export default function ListRepo({}: Props) {
         if (access) {
           axios
             .post(
-              `http://localhost:5000/update/?token=${access}&login=${name}`
+              `https://streakbotx.onrender.com/update/?token=${access}&login=${name}`
             )
             .then((response) => {
               console.log(response);
@@ -86,7 +86,7 @@ export default function ListRepo({}: Props) {
       });
       axios
         .post(
-          `http://localhost:5000/webhook/?link=https://api.github.com/repos/${repo_name}/hooks&token=${token}`
+          `https://streakbotx.onrender.com/webhook/?link=https://api.github.com/repos/${repo_name}/hooks&token=${token}`
         )
         .then((response) => {
           console.log(response);
@@ -107,7 +107,7 @@ export default function ListRepo({}: Props) {
           }
         });
     } else {
-      toast.warning("Please connect your Twitter account", {
+      toast.warning("Please connect your Twitter account!", {
         closeButton: false,
       });
     }
@@ -139,7 +139,7 @@ export default function ListRepo({}: Props) {
         </div>
       </div>
       <div className="connect_twitter">
-        <a href="http://localhost:5000/tweet/v2">
+        <a href="https://streakbotx.onrender.com/tweet/v2">
           <button className="twitter_btn">
             {connectStatus ? "Connected" : "Connect with Twitter"}{" "}
             <FiTwitter style={{ marginLeft: 10 }} />{" "}

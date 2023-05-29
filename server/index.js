@@ -18,7 +18,7 @@ dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-const callbackURL = "http://127.0.0.1:5000/tweetauth";
+const callbackURL = "https://streakbotx.onrender.com/tweetauth";
 const TwitterApi = require("twitter-api-v2").default;
 const twitterClient = new TwitterApi({
   clientId: process.env.CLIENT_ID,
@@ -86,8 +86,7 @@ app.post("/loggedin", (req, res) => {
 
   getUserInfo();
 });
-app.post("/webhook", (req, res) =>
-{
+app.post("/webhook", (req, res) => {
   const link = req.query.link;
   const token = req.query.token;
   const data = {
@@ -125,7 +124,8 @@ app.post("/webhook", (req, res) =>
 
 // github-to-twitter routes
 app.post("/tweet", async (req, res) => {
-  console.log("Hit the tweet route... I wonder what goes wrong");
+  console.log("Hit the tweet route... fingers crossed");
+  console.log(req.body.commits);
   if (req.body.commits) {
     const tweet = req.body.commits[0].message;
     const link = req.body.commits[0].url;
@@ -145,12 +145,19 @@ app.post("/tweet", async (req, res) => {
         .from("tokens")
         .update({ access: accessToken, refresh: refreshToken })
         .eq("login", author);
-      // console.log(data);
+      console.log(data);
       if (tweet.includes("tweet:")) {
         const updatedTweet = tweet.replace("tweet:", "");
         const { data: tweetData } = await client.v2.tweet(
           `#automatedbystreakbot \n ${updatedTweet} \n ${link}`
         );
+
+        // image upload spinnet - throwing 403 errors | no longer supported for some reason?
+        // const mediaId = await client.v1.uploadMedia('image.png');
+        // const newTweet = await client.v1.tweet("Hello!", {
+        //   media_ids: mediaId,
+        // });
+
         console.log("tweet successful");
       }
     } else {
@@ -212,7 +219,7 @@ app.get("/tweetauth", async (req, res) => {
       console.log(error);
     } else {
       res.redirect(
-        `http://127.0.0.1:5173/authorized/streak?access=${accessToken}`
+        `https://streakbotbeta.netlify.app/authorized/streak?access=${accessToken}`
       );
     }
   } else {
