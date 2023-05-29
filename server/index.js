@@ -41,14 +41,12 @@ app.post("/auth", (req, res) => {
           headers: {
             Accept: "application/vnd.github+json",
             Authorization: `Bearer ${token}`,
-            "X-GitHub-Api-Version": "2022-11-28",
           },
         });
         const user = await axios.get("https://api.github.com/user", {
           headers: {
             Accept: "application/vnd.github+json",
             Authorization: `Bearer ${token}`,
-            "X-GitHub-Api-Version": "2022-11-28",
           },
         });
         const payload = { repos: repos.data, user: user.data, token };
