@@ -135,6 +135,7 @@ app.post("/tweet", async (req, res) => {
       .order("id", { ascending: false })
       .eq("login", author)
       .limit(1);
+    console.log(data)
     if (data[0].refresh) {
       const refresh = data[0].refresh;
       const { client, accessToken, refreshToken } =
