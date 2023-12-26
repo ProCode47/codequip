@@ -35,26 +35,6 @@ export default function ListRepo({}: Props) {
           setToken(saved_token);
           console.log(saved_token);
         });
-        const saved_access = localStorage.getItem("streakbot_access");
-        if (saved_access != null) {
-          setConnectStatus(true);
-          console.log("saved access");
-        } else {
-          console.log("no saved access");
-          const access = new URLSearchParams(search).get("access");
-          if (access) {
-            axios
-              .post(
-                `https://streakbotx.onrender.com/update/?token=${access}&login=${name}`
-              )
-              .then((response) => {
-                console.log(response);
-              });
-            localStorage.setItem("streakbot_access", access);
-            console.log("saving access");
-            setConnectStatus(true);
-          }
-        }
     } else {
       const code = new URLSearchParams(search).get("code");
       if (code) {
