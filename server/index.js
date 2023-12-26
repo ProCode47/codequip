@@ -148,7 +148,7 @@ app.post("/tweet", async (req, res) => {
       if (tweet.includes("tweet:")) {
         const updatedTweet = tweet.replace("tweet:", "");
         const { data: tweetData } = await client.v2.tweet(
-          `#automatedbystreakbot \n ${updatedTweet} \n ${link}`
+          `#automatedbycodequip \n ${updatedTweet} \n ${link}`
         );
 
         // image upload spinnet - throwing 403 errors | no longer supported for some reason?
@@ -218,7 +218,7 @@ app.get("/tweetauth", async (req, res) => {
       console.log(error);
     } else {
       res.redirect(
-        `https://streakbotbeta.netlify.app/authorized/streak?access=${accessToken}`
+        `https://codequip.netlify.app/authorized/streak?access=${accessToken}`
       );
     }
   } else {
