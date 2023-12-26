@@ -19,7 +19,7 @@ export default function ListRepo({}: Props) {
   const [token, setToken] = useState<string>("");
   const [connectStatus, setConnectStatus] = useState<boolean>(false);
   const search = useLocation().search;
-  localStorage.removeItem("streakbot_access");
+  // localStorage.removeItem("streakbot_access");
 
   useEffect(() => {
     const saved_token = localStorage.getItem("streakbot_token");
