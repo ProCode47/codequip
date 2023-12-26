@@ -21,7 +21,7 @@ export default function Home({}: Props) {
       <h1>
         welcome to codequip<em>.</em>
       </h1>
-      <p>Where Commitments Meet Conversations - Share Your Genius, One Commit at a Time!</p>
+      <p>Where Commits Meet Conversations - Share Your Genius, One Commit at a Time!</p>
       <p>
         {" "}
         Use the keyword <b>tweet: </b>in your commits
