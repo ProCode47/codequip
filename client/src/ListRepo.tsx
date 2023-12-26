@@ -53,6 +53,7 @@ export default function ListRepo({}: Props) {
     }
   }, []);
   useEffect(() => {
+    if (name) {
       const saved_access = localStorage.getItem("streakbot_access");
       if (saved_access != null) {
         setConnectStatus(true);
@@ -72,6 +73,7 @@ export default function ListRepo({}: Props) {
           console.log("saving access");
           setConnectStatus(true);
         }
+      }
     }
   }, [name]);
   const handleConnect = async (event: any,repo_name: string) => {
