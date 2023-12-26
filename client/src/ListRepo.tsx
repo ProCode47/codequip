@@ -24,6 +24,7 @@ export default function ListRepo({}: Props) {
   useEffect(() => {
     console.log("Running")
     const saved_token = localStorage.getItem("streakbot_token");
+    console.log(saved_token)
     if (saved_token) {
       // logged in
       axios
