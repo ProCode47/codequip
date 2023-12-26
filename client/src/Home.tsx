@@ -19,9 +19,9 @@ export default function Home({}: Props) {
       <img className="blob blob2" src={blob2} alt="wave" />
 
       <h1>
-        welcome to streakbot<em>.</em>
+        welcome to codequip<em>.</em>
       </h1>
-      <p>Get social with your streaks!</p>
+      <p>Where Commitments Meet Conversations - Share Your Genius, One Commit at a Time!</p>
       <p>
         {" "}
         Use the keyword <b>tweet: </b>in your commits

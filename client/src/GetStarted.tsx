@@ -17,7 +17,7 @@ export default function GetStarted({}: Props) {
       <img className="blob blob1" src={blob} alt="wave" />
       <div className="glass2"></div>
       <img className="blob blob2" src={blob2} alt="wave" />
-      <h1>Streakbot has been setup! 🎉</h1>
+      <h1>CodeQuip has been setup! 🎉</h1>
       <h3 style={{fontWeight:"lighter"}}>Use the keyword <b>tweet: </b>in your commit messages and you're good to go! 🔥 🚀</h3>
       <h3 >
         Here are some fun examples to get you on your way 😏

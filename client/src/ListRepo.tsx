@@ -92,7 +92,7 @@ export default function ListRepo({}: Props) {
           console.log(response);
           if (response.data != "success") {
             setLoading(false)
-            toast.info("You've already added this repo to your Streakbot!", {
+            toast.info("You've can already use CodeQuip on this repo!", {
               closeButton: false,
               autoClose: 2500,
             });
@@ -116,7 +116,7 @@ export default function ListRepo({}: Props) {
   return (
     <div className="list reduce-font">
       <div className="header">
-        <h2>Setup Streakbot</h2>
+        <h2>Setup CodeQuip</h2>
         <div className="profile">
           {avatar ? (
             <>
